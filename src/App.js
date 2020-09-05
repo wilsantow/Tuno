@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Router, Switch, Route, Link } from "react-router-dom";
+
+import Navbar from "./components/Navbar";
+import TopTracks from "./containers/TopTracks/TopTracks";
+
+import Login from "./containers/Login/Login";
+import { UserProvider } from "./context/UserContext";
+import history from "./lib/history";
+
+import Callback from "./containers/Callback/Callback";
+
+import TopArtists from "./containers/TopArtists/TopArtists";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserProvider>
+      <Router history={history}>
+        <div className="md:text-xl ">
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/callback">
+              <Callback />
+            </Route>
+            <Route exact path="/">
+              <TopTracks />
+            </Route>
+            <Route path="/top-artists">
+              <TopArtists />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </UserProvider>
   );
 }
 
