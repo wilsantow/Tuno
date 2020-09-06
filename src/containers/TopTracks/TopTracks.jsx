@@ -27,6 +27,18 @@ export default function TopTracks() {
     setUser(timeLine);
     getData(range);
   };
+
+  const trackList = tracks.map((track, index) => (
+    <TopTrackCard
+      name={track.name}
+      artist={track.artist}
+      rank={index + 1}
+      art={track.art}
+      popularity={track.popularity}
+      key={track.id}
+    />
+  ));
+
   return (
     <div className="container mx-auto ">
       <HeaderImage image={banner} />
@@ -62,16 +74,7 @@ export default function TopTracks() {
           All time
         </button>
       </div>
-      {tracks.map((track, index) => (
-        <TopTrackCard
-          name={track.name}
-          artist={track.artist}
-          rank={index + 1}
-          art={track.art}
-          popularity={track.popularity}
-          key={track.id}
-        />
-      ))}
+      <div>{trackList}</div>
     </div>
   );
 }
