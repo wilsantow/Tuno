@@ -27,7 +27,7 @@ function App() {
             <Route exact path="/">
               <TopTracks />
             </Route>
-            <Route path="/top-artists">
+            <Route exact path="/top-artists">
               <TopArtists />
             </Route>
           </Switch>
