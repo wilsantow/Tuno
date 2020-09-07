@@ -5,9 +5,13 @@ import { getTopArtists } from "../../lib/fetchAndParse";
 import TopArtistCard from "../../components/TopArtistCard";
 import banner from "../../assets/images/Top-Artists.jpg";
 import HeaderImage from "../../components/HeaderImage";
+
+import TimelineButtons from "../../components/TimelineButtons";
 export default function TopArtists() {
   useEffect(() => {
+    setUser({ ...user, isloading: true });
     getData();
+    setUser({ ...user, isloading: false });
   }, []);
   const [user, setUser] = useContext(UserContext);
   const getData = async (range) => {
@@ -15,15 +19,18 @@ export default function TopArtists() {
     const newartists = { ...user, topartists: TopArtists };
     setUser(newartists);
   };
-  const changeTimeline = (range) => {
-    console.log(range);
-    const timeLine = { ...user };
-    timeLine.range = range;
-    setUser(timeLine);
-    getData(range);
-  };
-
   const artists = user.topartists;
+  const artistsList = artists.map((artist, index) => (
+    <TopArtistCard
+      name={artist.artistName}
+      genres={artist.genres[0]}
+      rank={index + 1}
+      art={artist.art}
+      popularity={artist.popularity}
+      key={artist.id}
+    />
+  ));
+
   return (
     <div className="container mx-auto">
       <HeaderImage image={banner} />
@@ -33,42 +40,14 @@ export default function TopArtists() {
         </h1>
         <h1 className="font-bold mt-6 ml-4">Top Artists</h1>
       </div>
-      <div className="flex flex-row mt-4 mb-4  ">
-        <button
-          className="ml-4 font-semibold p-2 focus:outline-none hover:bg-gray-300 rounded-md"
-          onClick={() => {
-            changeTimeline("short_term");
-          }}
-        >
-          Last month
-        </button>
-        <button
-          className="ml-4 font-semibold p-2 focus:outline-none hover:bg-gray-300 rounded-md"
-          onClick={() => {
-            changeTimeline("medium_term");
-          }}
-        >
-          Last 6 months
-        </button>
-        <button
-          className="ml-4 font-semibold p-2 focus:outline-none hover:bg-gray-300 rounded-md"
-          onClick={() => {
-            changeTimeline("long_term");
-          }}
-        >
-          All time
-        </button>
-      </div>
-      {artists.map((artist, index) => (
-        <TopArtistCard
-          name={artist.artistName}
-          genres={artist.genres[0]}
-          rank={index + 1}
-          art={artist.art}
-          popularity={artist.popularity}
-          key={artist.id}
-        />
-      ))}
+      <TimelineButtons type="artists" />
+
+      {user.isloading && (
+        <div>
+          <h1>loading</h1>
+        </div>
+      )}
+      {!user.isloading && <div>{artistsList}</div>}
     </div>
   );
 }

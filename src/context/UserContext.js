@@ -6,6 +6,7 @@ const initialState = {
   toptracks: [],
   topartists: [],
   range: "short_term",
+  isloading:false
 };
 
 export const UserContext = createContext();
