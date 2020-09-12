@@ -11,7 +11,7 @@ export default function TimelineButtons(props) {
         queryVal="medium_term"
         type={props.type}
       />
-      <IndButton name="Last 6 months" queryVal="long_term" type={props.type} />
+      <IndButton name="All time" queryVal="long_term" type={props.type} />
     </div>
   );
 }
