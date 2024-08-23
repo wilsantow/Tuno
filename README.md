@@ -7,7 +7,7 @@ The Application runs using [**Spotify API**](https://developer.spotify.com/docum
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0feecb18-901d-48ef-afb4-f15e10d64f1b/deploy-status)](https://app.netlify.com/sites/tuno/deploys)
 
-Try the live version  [tuno.netlify.app](https://tuno.netlify.app/login)
+Try the live version  [tuno.netlify.app](https://tuno.netlify.app)
 
 ## To run the project locally
 
